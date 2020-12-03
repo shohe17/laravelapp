@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
     return view('welcome');
 });
+
+// Route::get('posts', function () {
+//   //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
+//   return view('Post');
+// });
