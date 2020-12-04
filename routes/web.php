@@ -19,17 +19,17 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('posts/{msg}', function ($msg) {
-  //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
-
+//第一の必須パラメータの後ろに?をつけ、$msgを定義すると
+//必須パラメータがない場合にno messgaという文字列が表示される
+Route::get('posts/{msg?}', function ($msg='no message') {
+//第一引数で必須パラメータ{msg}を指定し、2でクロージャ（無名関数）に$msgを入れる
+//そうすれば$msgの中に必須パラメータの値が入る
 $html = <<<EOF
 <html>
-<head>
 <body>
-<h1>こんにちは</h1>
+<h2>以下は渡されている必須パラメーター</h2>
 <h2>{$msg}</h2>
 </body>
-</head>
 </html>
 EOF;
  return $html;
