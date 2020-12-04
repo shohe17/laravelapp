@@ -27,7 +27,7 @@
   <script defer src="{{ asset('/js/app.js') }}"></script>
 </head>
 <body>
-  <div>たこすけさんた</div>
+
 </body>
 
 </html>

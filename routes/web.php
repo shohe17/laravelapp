@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
-    return view('welcome');
-});
-
-// Route::get('posts', function () {
-//   //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
-//   return view('Post');
+// Route::get('/', function () {
+//     //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
+//     return view('welcome');
 // });
+
+Route::get('posts/{msg}', function ($msg) {
+  //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
+
+$html = <<<EOF
+<html>
+<head>
+<body>
+<h1>こんにちは</h1>
+<h2>{$msg}</h2>
+</body>
+</head>
+</html>
+EOF;
+ return $html;
+});
+// //必須パラメーターの渡し方
+// Route::get('posts/{id}', function ($id) {
+//   return 'Post' .$id;
+// });
+
+Route::get('posts/{id}', [PostController::class, 'getParameter'])->name('posts.parameter');
+
