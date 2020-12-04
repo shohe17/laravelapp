@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\HelloController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     //viewメソッドは引数で指定されたファイルを、viewフォルダの中から返す
 //     return view('welcome');
 // });
+
+Route::get('hello', [HelloController::class, 'index']);
 
 //第一の必須パラメータの後ろに?をつけ、$msgを定義すると
 //必須パラメータがない場合にno messgaという文字列が表示される

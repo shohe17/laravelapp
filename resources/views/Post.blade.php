@@ -27,6 +27,8 @@
   <script defer src="{{ asset('/js/app.js') }}"></script>
 </head>
 <body>
+<div>こんにちは</div>
+<div>{{ $id->id }}</div>
 
 </body>
 
