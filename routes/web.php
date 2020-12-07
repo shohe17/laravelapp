@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,4 @@ EOF;
 
 Route::get('posts/{id}', [PostController::class, 'getParameter'])->name('posts.parameter');
 
-Route::get('creat', function(){
-  return view('posts.creat');
-});
+Route::get('creat', [postController::class, 'creat']);
