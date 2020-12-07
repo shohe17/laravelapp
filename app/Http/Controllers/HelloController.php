@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class HelloController extends Controller
 {
-  public function index($id = 'shosho', $pass = 1234)
+  public function index($id = 'none', $pass = 'unknown')
   {
     $html = <<<EOF
 <html>

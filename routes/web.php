@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('hello', [HelloController::class, 'index']);
+Route::get('hello/{id?}/{pass?}', [HelloController::class, 'index']);
 
 //第一の必須パラメータの後ろに?をつけ、$msgを定義すると
 //必須パラメータがない場合にno messgaという文字列が表示される
@@ -43,3 +43,6 @@ EOF;
 
 Route::get('posts/{id}', [PostController::class, 'getParameter'])->name('posts.parameter');
 
+Route::get('creat', function(){
+  return view('posts.creat');
+});
