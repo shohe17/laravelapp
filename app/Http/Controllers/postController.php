@@ -17,11 +17,8 @@ class postController extends Controller
 
   public function post(Request $request)
   {
-    $msg = $request->msg;
-    $data = [
-      'msg' => 'こんにちは' . $msg . 'さん',
-    ];
     
-    return view('posts.creat', $data);
+    
+    return view('posts.creat', ['msg' => $request->msg]);
   }
 }
