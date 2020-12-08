@@ -17,10 +17,7 @@ class postController extends Controller
 
   public function post()
   {
-    $data = ['miki', 'jon', 'joes', 'josy', 'oksana'];
-    
-    return view('posts.creat', [
-      'data' => $data
-      ]);
+
+    return view('posts.creat');
   }
 }
