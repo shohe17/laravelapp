@@ -45,4 +45,4 @@ EOF;
 Route::get('posts/{id}', [PostController::class, 'getParameter'])->name('posts.parameter');
 
 Route::get('creat', [postController::class, 'creat']);
-Route::post('creat/post', [postController::class, 'post'])->name('creat.post');
+Route::get('creat/post', [postController::class, 'post'])->name('creat.post');

@@ -15,10 +15,12 @@ class postController extends Controller
     return view('posts.creat', $data);
   }
 
-  public function post(Request $request)
+  public function post()
   {
+    $data = ['miki', 'jon', 'joes', 'josy', 'oksana'];
     
-    
-    return view('posts.creat', ['msg' => $request->msg]);
+    return view('posts.creat', [
+      'data' => $data
+      ]);
   }
 }
