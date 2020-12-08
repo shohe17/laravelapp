@@ -14,4 +14,14 @@ class postController extends Controller
     //viewの第二引数では、配列に指定したキーを変数として渡すことができる
     return view('posts.creat', $data);
   }
+
+  public function post(Request $request)
+  {
+    $msg = $request->msg;
+    $data = [
+      'msg' => 'こんにちは' . $msg . 'さん',
+    ];
+    
+    return view('posts.creat', $data);
+  }
 }
