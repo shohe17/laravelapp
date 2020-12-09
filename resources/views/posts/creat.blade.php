@@ -1,22 +1,27 @@
 <html>
-
+<head>
+<!-- セクションの内容を嵌め込んで表示するためのもの -->
+<title>@yield('title')</title>
+</head>
 <body>
-  <!-- dataに入ってる一覧データを表示してください -->
-  <h1>continue, brakeの使い方</h1>
-  <ol>
-    @php
-    <!-- 変数初期化 -->
-    $counter = 0;
-    @endphp
-    <!-- 繰り返し文 -->
-    @while ($counter < count($data))
-    <li>{{$data[$counter]}}</li>
-    @php
-    $counter++
-    @endphp
-    @endwhile
-  </ol>
-
+  <h1>デザインはあと、@section、@yieldの使い方</h1>
+  <!-- セクションの内容を嵌め込んで表示するためのもの -->
+  <h2>@yield('title')</h2>
+  <!-- ページに表示されるコンテンツの区画を定義 -->
+  @section('menubar')
+  <h3 class="menutitle">※メニュー</h3>
+  <ul>
+    <!-- メインのレイアウトでsectionを用意する場合は、endsectionではなくshowを使う -->
+    <li>@show</li>
+  </ul>
+  <div class="content">
+  <!-- 継承先のレイアウトでsection('content')とすれば@yieldで表示できる -->
+  @yield('content')
+  </div>
+  <div class="footer">
+  <!-- 上と同じ -->
+  @yield('footer')
+  </div>
 </body>
 
 </html>
