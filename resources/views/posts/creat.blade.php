@@ -7,6 +7,7 @@
 @section('content')
   <p>ここの文字がpractice.bladeに反映されます</p>
   <p>必要な記述はここ</p>
+  @include('components.message', ['msg_title' => 'ok', 'msg_content' => 'サブビュー'])
 
   <!-- componentsフォルダのmessageファイル読み込み -->
   @component('components.message')
