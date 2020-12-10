@@ -9,11 +9,7 @@
   <h2>@yield('title')</h2>
   <!-- ページに表示されるコンテンツの区画を定義 -->
   @section('menubar')
-  <h3 class="menutitle">※メニュー</h3>
-  <ul>
-    <!-- メインのレイアウトでsectionを用意する場合は、endsectionではなくshowを使う -->
-    <li>@show</li>
-  </ul>
+  
   <div class="content">
   <!-- 継承先のレイアウトでsection'content'とすればyieldで表示できる -->
   @yield('content')

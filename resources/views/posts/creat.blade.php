@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+  <p>コンテンツの本文</p>
+  <ul>
+    <!-- 引数1にテンプレート名、２に配列、3に変数名を入れる -->
+    @each('components.item', $data, 'item')
+  </ul>
   <p>ここの文字がpractice.bladeに反映されます</p>
   <p>必要な記述はここ</p>
   @include('components.message', ['msg_title' => 'ok', 'msg_content' => 'サブビュー'])

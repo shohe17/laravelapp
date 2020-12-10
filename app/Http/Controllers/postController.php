@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 class postController extends Controller
 {
   public function creat(){
-    //変数に連想配列、キーがmsgの値を代入
+    //変数に連想配列を入力=>の左がキーで、右が値
     $data = [
-      'msg' => 'bladeの練習、下段には今日の日付が表示'
+      ['name' => 'みき', 'mail' => 'mikimiki@aa'],
+      ['name' => 'みか', 'mail' => 'mikamika@aa'],
+      ['name' => 'みこ', 'mail' => 'mikimiki@aa'],
+
     ];
     //viewの第二引数では、配列に指定したキーを変数として渡すことができる
-    return view('posts.creat', $data);
+    return view('posts.creat', ['data' => $data]);
   }
 
   public function post()
