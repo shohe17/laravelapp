@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class postController extends Controller
 {
-  public function creat(){
+  public function creat(Request $request){
     //viewの第二引数では、配列に指定したキーを変数として渡すことができる
-    return view('posts.creat', ['message' => 'Hello!']);
+    return view('posts.creat');
   }
 
   public function post()

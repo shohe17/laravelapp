@@ -15,17 +15,21 @@ class CreatMiddleware
      * @return mixed
      */
     //1はreqest情報を管理するインスタンス取得、2でclosureクラスのインスタンスを取得
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        // dataに連想配列の形で値を代入
-        $data = [
-          ['name' => 'miki', 'mail' => 'mi@mm'],
-          ['name' => 'moki', 'mail' => 'mo@mm'],
-          ['name' => 'maki', 'mail' => 'ma@mm'],
-        ];
-        // mergeはフォーム送信などで送られる値に、新たな値を追加するメソッド
-        //requestのmerge
-        $request->merge(['data' => $data]);
-        return $next($request);
+        //ミドルウェアからのレスポンスが$responseに代入される
+        $response = $next($request);
+        //左に requestのcontentを代入
+        // responseのcontentメソッドでresponseに設定されてるcontentが取得できる
+        $content = $response->content();
+
+        // patternのテキストをreplaceのテキストに置き換える
+        $pattern = '/<middleware>(.*)<\/middleware>/i';
+        $replace = '<a href="http://$1">$1</a>';
+        $content = preg_replace($pattern, $replace, $content);
+        // レスポンスのコンテンツ設定を実行
+        $response->setContent($content);
+        // responseをhandleが実行された場所に返す
+        return $response;
     }
 }
