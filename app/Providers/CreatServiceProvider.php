@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class HelloServiceProvider extends ServiceProvider
+class CreatServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -24,8 +24,8 @@ class HelloServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view::composer('posts.creat', function($view){
-          $view->with('view_message', 'composer message!');
-        });
+        // 第一引数でビューコンポーザーを割り当てるビューを選択、2では実行するクラスか処理を書く
+        view::composer('posts.creat', 'App\Http\Composer\CreatComposer'
+        );
     }
 }
