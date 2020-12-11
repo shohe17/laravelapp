@@ -3,6 +3,7 @@
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\CreatMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,29 +21,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('hello/{id?}/{pass?}', [HelloController::class, 'index']);
-
-//第一の必須パラメータの後ろに?をつけ、$msgを定義すると
-//必須パラメータがない場合にno messgaという文字列が表示される
-Route::get('posts/{msg?}', function ($msg='no message') {
-//第一引数で必須パラメータ{msg}を指定し、2でクロージャ（無名関数）に$msgを入れる
-//そうすれば$msgの中に必須パラメータの値が入る
-$html = <<<EOF
-<html>
-<body>
-<h2>以下は渡されている必須パラメーター</h2>
-<h2>{$msg}</h2>
-</body>
-</html>
-EOF;
- return $html;
-});
-// //必須パラメーターの渡し方
-// Route::get('posts/{id}', function ($id) {
-//   return 'Post' .$id;
-// });
 
 Route::get('posts/{id}', [PostController::class, 'getParameter'])->name('posts.parameter');
-
-Route::get('creat', [postController::class, 'creat']);
+// 引数に利用するmiddlewareクラスを指定する
+Route::get('creat', [postController::class, 'creat'])->middleware('CreatMiddleware::class');
 Route::get('creat/post', [postController::class, 'post'])->name('creat.post');
