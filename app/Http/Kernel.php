@@ -43,6 +43,12 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        // ミドルウェアグループの作成
+        'helo' => [
+            \App\Http\Middleware\CreatMiddleware::class,
+
+        ]
     ];
 
     /**
