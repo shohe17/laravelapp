@@ -26,3 +26,4 @@ Route::get('posts/{id}', [PostController::class, 'getParameter'])->name('posts.p
 // middleware('helo')にアクセスしたときはkernel.phpのmiddlewarGroupのheloに登録してあるミドルウェアが実行される
 Route::get('creat', [postController::class, 'creat'])->middleware('helo');
 Route::get('creat/post', [postController::class, 'post'])->name('creat.post');
+Route::post('creat', [postController::class, 'postValidation']);
