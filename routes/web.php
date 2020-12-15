@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\HelloController;
 use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CreatMiddleware;
@@ -24,5 +23,7 @@ use App\Http\Middleware\CreatMiddleware;
 
 Route::get('posts/{id}', [PostController::class, 'getParameter'])->name('posts.parameter');
 // 引数に利用するmiddlewareクラスを指定する
-Route::get('creat', [postController::class, 'creat'])->middleware('CreatMiddleware::class');
+// middleware('helo')にアクセスしたときはkernel.phpのmiddlewarGroupのheloに登録してあるミドルウェアが実行される
+Route::get('creat', [postController::class, 'creat'])->middleware('helo');
 Route::get('creat/post', [postController::class, 'post'])->name('creat.post');
+Route::post('creat', [postController::class, 'postValidation']);
