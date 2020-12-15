@@ -8,31 +8,46 @@ use Validator;
 class postController extends Controller
 {
   public function creat(Request $request){
-    //viewの第二引数では、配列に指定したキーを変数として渡すことができる
+    // validatorクラスのインスタンス作成、makeでrequestのqueryを指定
+    // 第一引数でリクエストデータ、2で
+    $validator = Validator::make($request->query(), [
+      'id' => 'required',
+      'pass' => 'required',
+    ]);
+
+    if ($validator->fails()){
+      $msg = 'クエリーに問題あります';
+    } else {
+      $msg = 'id/passを受け取りましたフォーム入力';
+    }
+
     return view('posts.creat', [
-      'msg' => 'フォームを入力:'
+      'msg' => $msg,
     ]);
   }
+  
 
   public function postValidation(Request $request)
   {
-    // makeの1引数は確認する値、2はルールの配列
-    $validator = Validator::make($request->all(), [
+   // validatorクラスのインスタンス作成、makeでrequestのqueryを指定
+    // 第一引数でリクエストデータ、2で検証ルールを配列にまとめる
+    $messages = [
+      'name.required' => '名前は必須です',
+      'mail.email' => 'メール形式で入力して',
+      'age.numeric' => '年齢は整数で',
+      'age.between' => '0〜150で入力して'
+    ];
+    $rules = [
       'name' => 'required',
       'mail' => 'email',
       'age' => 'numeric|between:0,150',
-    ]);
+    ];
+    
+    $validator = Validator::make($request->all(), $rules, $messages);
 
-    // failsはvalidation処理に失敗したかどうが検証するメソッド
     if ($validator->fails()){
-      // エラーじはcreatにリダイレクト
-      // withErrorsは引数にvalidatorインスタンスを渡し、エラーメッセージをリダイレクトに引き継ぐ
-      // withInputは入力情報（送信されたフォームの値）を引き継がせる
       return redirect('creat')->withErrors($validator)->withInput();
-    }
-     return view('posts.creat', [
-      'msg' => 'フォームが正しく入力されました！'   
-     ]);
+  }
   }
 
   public function post()
