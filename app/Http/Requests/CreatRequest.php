@@ -40,4 +40,14 @@ class CreatRequest extends FormRequest
           'age' => 'numeric|between:0,150',
         ];
     }
+    // validateメッセージの追加
+    public function messages()
+    {
+      return [
+        'name.required' => '名前は必須です',
+        'mail.email' => 'メール形式で入力して',
+        'age.numeric' => '年齢は整数で',
+        'age.between' => '0〜150で入力して'
+      ];
+    }
 }
