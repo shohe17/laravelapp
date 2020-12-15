@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatRequest;
 
 class postController extends Controller
 {
@@ -13,14 +14,9 @@ class postController extends Controller
     ]);
   }
 
-  public function postValidation(Request $request)
+  public function postValidation(CreatRequest $request)
   {
-     $validate_rule = [
-       'name' => 'required',
-       'mail' => 'email',
-       'age' => 'numeric|between:0,150',
-     ];
-     $this->validate($request, $validate_rule);
+
      return view('posts.creat', [
       'msg' => 'フォームが正しく入力されました！'   
      ]);
