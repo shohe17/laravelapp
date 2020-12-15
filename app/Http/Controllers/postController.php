@@ -35,15 +35,31 @@ class postController extends Controller
       'name.required' => '名前は必須です',
       'mail.email' => 'メール形式で入力して',
       'age.numeric' => '年齢は整数で',
-      'age.between' => '0〜150で入力して'
+      'age.min' => '年齢は0以上です',
+      'age.max' => '年齢は100以下です'
     ];
+
     $rules = [
       'name' => 'required',
       'mail' => 'email',
-      'age' => 'numeric|between:0,150',
+      'age' => 'numeric',
     ];
     
     $validator = Validator::make($request->all(), $rules, $messages);
+    
+    
+    
+    // 新しいルールの追加をしている。0より小さく、100より大きい場合はエラー
+    // sometimesの引数は、1項目、2ルール名、3クロージャでを表し、処理結果によって新しいルールの追加
+    //  $inputは入力値（name,mail,age）がまとまったもの
+    $validator->sometimes('age', 'min:0', function($input) {
+      // 引数3で!is?intの値（min:0のvalidation）を返している()内で受け取った値のなかのageを指定
+      return !is_int($input->age);
+    });
+
+    $validator->sometimes('age', 'max:100', function($input) {
+      return !is_int($input->age);
+   });
 
     if ($validator->fails()){
       return redirect('creat')->withErrors($validator)->withInput();

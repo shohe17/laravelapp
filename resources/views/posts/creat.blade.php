@@ -18,7 +18,6 @@
   @endif
   <form action="/creat" method="post">
   <table>
-    @csrf
     <!-- hasでエラーが発生してるか確かめる、項目名にエラーが発生しているか確認している -->
     @error('name')
     <!-- valueのold波かっこで、入力情報を保持することができる -->
