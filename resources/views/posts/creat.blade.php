@@ -20,21 +20,21 @@
   <table>
     @csrf
     <!-- hasでエラーが発生してるか確かめる、項目名にエラーが発生しているか確認している -->
-    @if($errors->has('name'))
+    @error('name')
     <!-- valueのold波かっこで、入力情報を保持することができる -->
     <!-- firstは、指定した項目の最初のエラーメッセージを取得 -->
-    <tr><th>ERROR</th><td>{{ $errors->first('name') }}</td></tr>
-    @endif
+    <tr><th>ERROR</th><td>{{ $message }}</td></tr>
+    @enderror
     <tr><th>name: </th><td><input type="text" name="name" value="{{ old('name') }}"></td></tr>
    
-    @if($errors->has('mail'))
-    <tr><th>ERROR</th><td>{{ $errors->first('mail') }}</td></tr>
-    @endif
+    @error('mail')
+    <tr><th>ERROR</th><td>{{ $message }}</td></tr>
+    @enderror
     <tr><th>mail: </th><td><input type="text" name="mail" value="{{ old('mail') }}"></td></tr>
     
-    @if($errors->has('age'))
-    <tr><th>ERROR</th><td>{{ $errors->first('age') }}</td></tr>
-    @endif
+    @error('age')
+    <tr><th>ERROR</th><td>{{ $message }}</td></tr>
+    @enderror
     <tr><th>age: </th><td><input type="text" name="age" value="{{ old('age') }}"></td></tr>
     <tr><th></th><td><input type="submit" value="send"></td></tr>
   </table>
