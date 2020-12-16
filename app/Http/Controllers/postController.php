@@ -4,25 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\DB;
 
 class postController extends Controller
 {
   public function creat(Request $request){
-    // validatorクラスのインスタンス作成、makeでrequestのqueryを指定
-    // 第一引数でリクエストデータ、2で
-    $validator = Validator::make($request->query(), [
-      'id' => 'required',
-      'pass' => 'required',
-    ]);
-
-    if ($validator->fails()){
-      $msg = 'クエリーに問題あります';
-    } else {
-      $msg = 'id/passを受け取りましたフォーム入力';
-    }
-
+    // dbからデータを取り出すときの処理
+    // selectの引数は実行されるSQL文
+    $items = DB::select('select * from user');
     return view('posts.creat', [
-      'msg' => $msg,
+      'items' => $items
     ]);
   }
   

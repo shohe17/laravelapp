@@ -8,8 +8,17 @@
   <p>コンテンツの本文</p>
   <p>これは<middleware>google.com</middleware>へのリンクです</p>
   <p>これは<middleware>yahoo.com</middleware>へのリンクです</p>
-
-  <p>{{ $msg }}</p>
+  <h1>ここはデータ読みこみ</h1>
+  <table>
+  <tr><th>Name</th><th>mail</th><th>age</th></tr>
+    @foreach ($items as $item)
+    <tr>
+      <td>{{ $item->name }}</td>
+      <td>{{ $item->mail }}</td>
+      <td>{{ $item->age }}</td>
+    </tr>
+  @endforeach
+  </table>  
   <!-- 引数の中身の>より左が0より大きい場合エラーを表示、countでerrorsを計算する -->
   @if(count($errors) > 0)
   <div>
