@@ -9,9 +9,18 @@ use Illuminate\Support\Facades\DB;
 class postController extends Controller
 {
   public function creat(Request $request){
-    // dbからデータを取り出すときの処理
-    // selectの引数は実行されるSQL文
-    $items = DB::select('select * from user');
+    // issetは$requestにidが入っているか確かめている
+    if (isset($request->id))
+    {
+      // 
+      $param = ['id' => $request->id];
+      // :idはパラメータの値を当て込むプレースホルダ
+      // paramのidを:idに嵌め込んでいる
+      $items = DB::select('select * from user where id = :id', $param);
+    } else {
+      $items = DB::select('select * from user');
+    }
+
     return view('posts.creat', [
       'items' => $items
     ]);
