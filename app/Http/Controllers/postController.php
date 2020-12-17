@@ -8,11 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 class postController extends Controller
 {
-  public function creat(Request $request)
+  public function index(Request $request)
   {
-    $items = DB::select('select * from user');
-    return view('posts.creat', [
+    // userテーブルのデータを全て取得
+    $items = DB::table('user')->get();
+    return view('posts.index', [
+      // 取得した情報を含めてposts.indexに値を
       'items' => $items
+    ]);
+  }
+
+  // 指定したidのレコード取得
+  public function show(Request $request)
+  {
+    // idをリクエストされたidと定義
+    $id = $request->id;
+    // メソッドが複数ある場合はメソッドチェーンという
+    // where（フィールド名（カラム）, 値）として、指定された条件に当てはまるレコードを絞り込む
+    // firstは最初の値だけ返すメソッド
+    $item = DB::table('user')->where('id', $id)->first();
+
+    return view('posts.show', [
+      'item' => $item
     ]);
   }
 
