@@ -30,3 +30,6 @@ Route::post('creat', [postController::class, 'postValidation']);
 
 Route::get('creat/add', [postController::class, 'add']);
 Route::post('creat/add', [postController::class, 'registerCreat']);
+
+Route::get('creat/edit', [postController::class, 'edit']);
+Route::post('creat/edit', [postController::class, 'update']);
