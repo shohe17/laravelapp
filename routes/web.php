@@ -33,3 +33,6 @@ Route::post('creat/add', [postController::class, 'registerCreat']);
 
 Route::get('creat/edit', [postController::class, 'edit']);
 Route::post('creat/edit', [postController::class, 'update']);
+
+Route::get('creat/delete', [postController::class, 'delete']);
+Route::post('creat/delete', [postController::class, 'remove']);
