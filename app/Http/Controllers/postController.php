@@ -12,6 +12,7 @@ class postController extends Controller
   {
     // userテーブルのデータを全て取得
     $items = DB::table('user')->get();
+    
     return view('posts.index', [
       // 取得した情報を含めてposts.indexに値を
       'items' => $items
@@ -25,11 +26,10 @@ class postController extends Controller
     $id = $request->id;
     // メソッドが複数ある場合はメソッドチェーンという
     // where（フィールド名（カラム）, 値）として、指定された条件に当てはまるレコードを絞り込む
-    // firstは最初の値だけ返すメソッド
-    $item = DB::table('user')->where('id', $id)->first();
-
+    // where内で、$idに入っているid（今回は3）より小さい数を取得
+    $items = DB::table('user')->where('id', '<=', $id)->get();
     return view('posts.show', [
-      'item' => $item
+      'items' => $items
     ]);
   }
 
