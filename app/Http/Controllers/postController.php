@@ -38,6 +38,19 @@ class postController extends Controller
     ]);
   }
 
+  public function create(Request $request)
+  {
+    $param = [
+      'name' => $request->name,
+      'mail' => $request->mail,
+      'age' => $request->age
+    ];
+
+    DB::table('user')->insert($param);
+
+    return redirect('/');
+  }
+
   public function postValidation(Request $request)
   {
     // validatorクラスのインスタンス作成、makeでrequestのqueryを指定
@@ -78,19 +91,6 @@ class postController extends Controller
   public function add(Request $request)
   {
     return view('posts.add');
-  }
-
-  public function registerCreat(Request $request)
-  {
-    // paramに配列を代入
-    $param = [
-      'name' => $request->name,
-      'mail' => $request->mail,
-      'age' => $request->age
-    ];
-    // (:name, :mail, :age)にparamからデータをあて込んでいる
-    DB::insert('insert into user (name, mail, age) values (:name, :mail, :age)', $param);
-    return redirect('/creat');
   }
 
   public function edit(Request $request)
