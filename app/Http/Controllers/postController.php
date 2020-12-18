@@ -23,13 +23,16 @@ class postController extends Controller
   public function show(Request $request)
   {
     // idをリクエストされたidと定義
-    $min = $request->min;
-    $max = $request->max;
+    $page = $request->page;
     // userテーブルからnameとmailのどちらかの中から部分一致する値を表示したい
     $items = DB::table('user')
     // 検索条件を文字列で指定でき、?のなかに[]で指定した値が入る
-    ->whereRaw('age >= ? and age <= ?', 
-    [$min, $max])->get();
+    // 指定した位置からレコードを取得するもの
+    // 4の場合id4から取得
+    ->offset($page * 4)
+    // 引数の数だけレコードを取得
+    ->limit(3)
+    ->get();
     return view('posts.show', [
       'items' => $items
     ]);
