@@ -95,13 +95,12 @@ class postController extends Controller
 
   public function edit(Request $request)
   {
-    // リクエストされたidを受け取る
-    $param = ['id' => $request->id];
-    // userテーブルのidに受け取ったparamのidを入れる
-    $item = DB::select('select * from user where id = :id', $param);
+    // リクエストされたidの一つ目をitemに代入する
+    $item = DB::table('user')
+    ->where('id', $request->id)->first();
     // posts.editファイルに移動するとき初期値が0の$itemを渡す
     return view('posts.edit', [
-      'form' => $item[0]
+      'form' => $item
       ]);
   }
   
@@ -109,15 +108,16 @@ class postController extends Controller
   {
      // paramに配列を代入
      $param = [
-      'id' => $request->id,
       'name' => $request->name,
       'mail' => $request->mail,
       'age' => $request->age
     ];
     // 更新したい値（:name:mail:age）にすでに値が入っているparamを入れる
-    DB::update('update user set name =:name, mail =:mail, age =:age where id =:id', $param);
+      DB::table('user')
+      ->where('id', $request->id)
+      ->update($param);
 
-    return redirect('/creat');  
+    return redirect('/');  
   }
 
   // リクエストidを指定したレコードのidと紐づける
