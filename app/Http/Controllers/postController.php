@@ -123,22 +123,22 @@ class postController extends Controller
   // リクエストidを指定したレコードのidと紐づける
   public function delete(Request $request)
   {
-    // リクエストされたidの受け取り
-    $param = ['id' => $request->id];
     // 受け取ったidを指定したidの場所に入れる
-    $item = DB::select('select * from user where id = :id', $param);
+    $item = DB::table('user')
+    ->where('id', $request->id)
+    ->first();
 
     return view('posts.delete', [
-      'form' => $item[0]
+      'form' => $item
     ]);
   }
 
   public function remove(Request $request)
   {
-    // リクエストデータ(id)の受け取り
-    $param = ['id' => $request->id];    
     // 削除処理
-    DB::delete('delete from user where id = :id', $param);
-    return redirect('/creat');
+    DB::table('user')
+    ->where('id', $request->id)
+    ->delete();
+    return redirect('/');
   }
 }
