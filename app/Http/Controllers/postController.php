@@ -23,11 +23,15 @@ class postController extends Controller
   public function show(Request $request)
   {
     // idをリクエストされたidと定義
-    $id = $request->id;
-    // メソッドが複数ある場合はメソッドチェーンという
-    // where（フィールド名（カラム）, 値）として、指定された条件に当てはまるレコードを絞り込む
-    // where内で、$idに入っているid（今回は3）より小さい数を取得
-    $items = DB::table('user')->where('id', '<=', $id)->get();
+    $name = $request->name;
+    // userテーブルからnameとmailのどちらかの中から部分一致する値を表示したい
+    $items = DB::table('user')
+    // nameカラムから、リクエストされたnameの部分一致する値のレコードを選択
+    ->where('name', 'like', '%' . $name . '%')
+    // mailカラムから、リクエストされたnameの部分一致する値のレコードを選択
+    ->orwhere('mail', 'like', '%' . $name . '%')
+    // 全てのデータ読み込み
+    ->get();
     return view('posts.show', [
       'items' => $items
     ]);
