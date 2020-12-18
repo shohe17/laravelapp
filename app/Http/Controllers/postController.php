@@ -23,20 +23,17 @@ class postController extends Controller
   public function show(Request $request)
   {
     // idをリクエストされたidと定義
-    $name = $request->name;
+    $min = $request->min;
+    $max = $request->max;
     // userテーブルからnameとmailのどちらかの中から部分一致する値を表示したい
     $items = DB::table('user')
-    // nameカラムから、リクエストされたnameの部分一致する値のレコードを選択
-    ->where('name', 'like', '%' . $name . '%')
-    // mailカラムから、リクエストされたnameの部分一致する値のレコードを選択
-    ->orwhere('mail', 'like', '%' . $name . '%')
-    // 全てのデータ読み込み
-    ->get();
+    // 検索条件を文字列で指定でき、?のなかに[]で指定した値が入る
+    ->whereRaw('age >= ? and age <= ?', 
+    [$min, $max])->get();
     return view('posts.show', [
       'items' => $items
     ]);
   }
-
 
   public function postValidation(Request $request)
   {
