@@ -14,8 +14,12 @@ class CreatUserTable extends Migration
     // テーブル作成のための処理
     public function up()
     {
+        //1にはテーブル名、2にはテーブルを作成する処理をまとめたクロージャ
         Schema::creat('user', function(Blueprint $table){
-          $table->bigIncrements('id');
+          $table->increments('id');
+          $table->string('name');
+          $table->string('mail');
+          $table->integer('age');
           $table->timestamp();
         });
     }
