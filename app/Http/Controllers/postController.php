@@ -11,7 +11,7 @@ class postController extends Controller
   public function index(Request $request)
   {
     // userテーブルのデータを全て取得
-    $items = DB::table('user')->get();
+    $items = DB::table('users')->get();
     
     return view('posts.index', [
       // 取得した情報を含めてposts.indexに値を
@@ -25,7 +25,7 @@ class postController extends Controller
     // idをリクエストされたidと定義
     $page = $request->page;
     // userテーブルからnameとmailのどちらかの中から部分一致する値を表示したい
-    $items = DB::table('user')
+    $items = DB::table('users')
     // 検索条件を文字列で指定でき、?のなかに[]で指定した値が入る
     // 指定した位置からレコードを取得するもの
     // 4の場合id4から取得
@@ -46,7 +46,7 @@ class postController extends Controller
       'age' => $request->age
     ];
 
-    DB::table('user')->insert($param);
+    DB::table('users')->insert($param);
 
     return redirect('/');
   }
@@ -70,7 +70,6 @@ class postController extends Controller
     ];
 
     $validator = Validator::make($request->all(), $rules, $messages);
-
     // 新しいルールの追加をしている。0より小さく、100より大きい場合はエラー
     // sometimesの引数は、1項目、2ルール名、3クロージャでを表し、処理結果によって新しいルールの追加
     //  $inputは入力値（name,mail,age）がまとまったもの
@@ -78,13 +77,24 @@ class postController extends Controller
       // 引数3で!is?intの値（min:0のvalidation）を返している()内で受け取った値のなかのageを指定
       return !is_int($input->age);
     });
+    
 
     $validator->sometimes('age', 'max:100', function ($input) {
       return !is_int($input->age);
     });
+    
+    $param = [
+      'name' => $request->name,
+      'mail' => $request->mail,
+      'age' => $request->age
+    ];
+
+    DB::table('users')->insert($param);
 
     if ($validator->fails()) {
-      return redirect('creat')->withErrors($validator)->withInput();
+      return redirect('/')->withErrors($validator)->withInput();
+    } else {
+      return redirect('/');
     }
   }
 
@@ -96,7 +106,7 @@ class postController extends Controller
   public function edit(Request $request)
   {
     // リクエストされたidの一つ目をitemに代入する
-    $item = DB::table('user')
+    $item = DB::table('users')
     ->where('id', $request->id)->first();
     // posts.editファイルに移動するとき初期値が0の$itemを渡す
     return view('posts.edit', [
@@ -113,7 +123,7 @@ class postController extends Controller
       'age' => $request->age
     ];
     // 更新したい値（:name:mail:age）にすでに値が入っているparamを入れる
-      DB::table('user')
+      DB::table('users')
       ->where('id', $request->id)
       ->update($param);
 
@@ -124,7 +134,7 @@ class postController extends Controller
   public function delete(Request $request)
   {
     // 受け取ったidを指定したidの場所に入れる
-    $item = DB::table('user')
+    $item = DB::table('users')
     ->where('id', $request->id)
     ->first();
 
@@ -136,7 +146,7 @@ class postController extends Controller
   public function remove(Request $request)
   {
     // 削除処理
-    DB::table('user')
+    DB::table('users')
     ->where('id', $request->id)
     ->delete();
     return redirect('/');
