@@ -25,7 +25,8 @@ class postController extends Controller
   {
     // requestされた入力された（input）情報を見つけて変数に代入
     // findは数値だけ
-    $item = User::find($request->input);
+    // firstは最初のレコードだけ取得、like%%で曖昧検索
+    $item = User::where('name', 'like', "%$request->input%")->first();
     // 変数に、キーがinputのリクエスト情報とキーがitemの変数を代入
     $param = ['input' => $request->input, 'item' => $item];
     // 2引数でparamに入ってる値を返す
