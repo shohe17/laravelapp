@@ -47,4 +47,9 @@ class User extends Authenticatable
       // thisで指定されている値を返す、今回でいうとdi, name, age
       return $this->id . ': ' . $this->name . ' (' . $this->age . ')';
     }
+
+    public function scopeNameEqual($query, $str)
+    {
+      return $query->where('name', $str);
+    }
 }
