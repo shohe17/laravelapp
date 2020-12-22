@@ -5,7 +5,16 @@
 @endsection
 
 @section('content')
-  <p>コンテンツの本文</p>
+<table>
+  <tr><th>Data</th></tr>
+    @foreach ($items as $item)
+    <tr>
+      <!-- usermodelで定義した関数getdataを使ってitemを順に常時する -->
+      <td>{{ $item->getData() }}</td>
+    </tr>
+  @endforeach
+  </table>  
+
   <p>これは<middleware>google.com</middleware>へのリンクです</p>
   <p>これは<middleware>yahoo.com</middleware>へのリンクです</p>
   <h1>ここはデータ読みこみ</h1>

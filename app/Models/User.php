@@ -40,4 +40,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // ユーザーデータを取得
+    public function getData()
+    {
+      // thisで指定されている値を返す、今回でいうとdi, name, age
+      return $this->id . ': ' . $this->name . ' (' . $this->age . ')';
+    }
 }
