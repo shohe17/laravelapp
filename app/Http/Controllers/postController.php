@@ -23,20 +23,13 @@ class postController extends Controller
   // 指定したidのレコード取得
   public function show(Request $request)
   {
-    // idをリクエストされたidと定義
-    $page = $request->page;
-    // userテーブルからnameとmailのどちらかの中から部分一致する値を表示したい
-    $items = DB::table('users')
-    // 検索条件を文字列で指定でき、?のなかに[]で指定した値が入る
-    // 指定した位置からレコードを取得するもの
-    // 4の場合id4から取得
-    ->offset($page * 4)
-    // 引数の数だけレコードを取得
-    ->limit(3)
-    ->get();
-    return view('posts.show', [
-      'items' => $items
-    ]);
+    // requestされた入力された（input）情報を見つけて変数に代入
+    // findは数値だけ
+    $item = User::find($request->input);
+    // 変数に、キーがinputのリクエスト情報とキーがitemの変数を代入
+    $param = ['input' => $request->input, 'item' => $item];
+    // 2引数でparamに入ってる値を返す
+    return view('posts.show', $param);
   }
 
   public function create(Request $request)
@@ -152,4 +145,5 @@ class postController extends Controller
     ->delete();
     return redirect('/');
   }
+  
 }

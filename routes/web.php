@@ -37,3 +37,4 @@ Route::get('creat/delete', [postController::class, 'delete']);
 Route::post('creat/delete', [postController::class, 'remove']);
 
 Route::get('posts/show', [postController::class, 'show']);
+Route::post('posts/show', [postController::class, 'show']);
