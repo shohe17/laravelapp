@@ -23,9 +23,15 @@ class postController extends Controller
   // 指定したidのレコード取得
   public function show(Request $request)
   {
-    // requestされた入力された（input）情報を見つけて変数に代入
-    // firstは最初のレコードだけ取得、like%%で曖昧検索
-    $item = User::nameEqual($request->input)->first();
+    // 変数に requestのinput *1を渡す
+    $min = $request->input * 1;
+    // 変数に min + 10を渡す、minが0の場合10、10の場合20
+    $max = $min + 10;
+    // greaterとlessを同時によば出して、x以上x以下の絞り込を実行
+    // 今回の場合、minにリクエストされる数字以上、maxで指定してる値以下の数字
+    $item = User::ageGreaterthan($min)
+    ->ageLessThan($max)
+    ->first();
     // 変数に、キーがinputのリクエスト情報とキーがitemの変数を代入
     $param = ['input' => $request->input, 'item' => $item];
     // 2引数でparamに入ってる値を返す

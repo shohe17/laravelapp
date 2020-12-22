@@ -52,4 +52,15 @@ class User extends Authenticatable
     {
       return $query->where('name', $str);
     }
+
+    // ageがnと等しいか、大きい場合
+    public function scopeGreaterThan($query, $n)
+    {
+      return $query->where('age', '>=', $n);
+    }
+
+    public function scopeAgeLessThan($query, $n)
+    {
+      return $query->where('age', '<=', $n);
+    }
 }
