@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -54,8 +55,8 @@ class User extends Authenticatable
     }
 
     // ageがnと等しいか、大きい場合
-    public function scopeGreaterThan($query, $n)
-    {
+    public function scopeAgeGreaterThan($query, $n)
+    { 
       return $query->where('age', '>=', $n);
     }
 
@@ -63,4 +64,16 @@ class User extends Authenticatable
     {
       return $query->where('age', '<=', $n);
     }
+
+    protected static function boot()
+    {
+      parent::boot();
+
+      // 引数で渡されたbuilderでwhereを呼び出し、ageが20以上に絞り込む
+      // 引数のbuilderを使って処理を実行すれば全ての検索処理に適応される
+      static::addGlobalScope('age', function(Builder $builder){
+        $builder->where('age', '<', 20);
+      });
+    }
+    
 }
