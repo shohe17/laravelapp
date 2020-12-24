@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class postController extends Controller
 {
   public function index(Request $request)
   {
     // userテーブルのデータを全て取得
-    $items = DB::table('users')->get();
+    $items = User::all();
     
     return view('posts.index', [
       // 取得した情報を含めてposts.indexに値を
@@ -22,20 +23,19 @@ class postController extends Controller
   // 指定したidのレコード取得
   public function show(Request $request)
   {
-    // idをリクエストされたidと定義
-    $page = $request->page;
-    // userテーブルからnameとmailのどちらかの中から部分一致する値を表示したい
-    $items = DB::table('users')
-    // 検索条件を文字列で指定でき、?のなかに[]で指定した値が入る
-    // 指定した位置からレコードを取得するもの
-    // 4の場合id4から取得
-    ->offset($page * 4)
-    // 引数の数だけレコードを取得
-    ->limit(3)
-    ->get();
-    return view('posts.show', [
-      'items' => $items
-    ]);
+    // 変数に requestのinput *1を渡す
+    $min = $request->input * 1;
+    // 変数に min + 10を渡す、minが0の場合10、10の場合20
+    $max = $min + 10;
+    // greaterとlessを同時によば出して、x以上x以下の絞り込を実行
+    // 今回の場合、minにリクエストされる数字以上、maxで指定してる値以下の数字
+    $item = User::ageGreaterthan($min)
+    ->ageLessThan($max)
+    ->first();
+    // 変数に、キーがinputのリクエスト情報とキーがitemの変数を代入
+    $param = ['input' => $request->input, 'item' => $item];
+    // 2引数でparamに入ってる値を返す
+    return view('posts.show', $param);
   }
 
   public function create(Request $request)
@@ -151,4 +151,5 @@ class postController extends Controller
     ->delete();
     return redirect('/');
   }
+  
 }
