@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\ScopeUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,13 +68,11 @@ class User extends Authenticatable
 
     protected static function boot()
     {
+      // 初期化処理
       parent::boot();
-
-      // 引数で渡されたbuilderでwhereを呼び出し、ageが20以上に絞り込む
-      // 引数のbuilderを使って処理を実行すれば全ての検索処理に適応される
-      static::addGlobalScope('age', function(Builder $builder){
-        $builder->where('age', '<', 20);
-      });
+      // addGlobalscopeはグローバルスコープを（として）追加するメソッド
+      // 引数をグローバルスコープとして指定する
+      static::addGlobalScope(new ScopeUser);
     }
     
 }
