@@ -11,11 +11,17 @@ class Board extends Model
     public static $rules = array(
       'user_id' => 'required',
       'titel' => 'required',
-      'message' => 'required',
+      'message' => 'required'
     );
 
     public function getData()
     {
-      return $this->id . ' :' . $this->title;
+      return $this->id . ': ' . $this->title;
     }
+
+  //   protected $fillable = [
+  //     'user_id',
+  //     'email',
+  //     'password',
+  // ];
 }

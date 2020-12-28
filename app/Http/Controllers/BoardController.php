@@ -19,10 +19,10 @@ class BoardController extends Controller
   }
 
   // 指定したidのレコード取得
-  public function showCreatForm(Request $request)
+  public function showCreateForm(Request $request)
   {
     // 2引数でparamに入ってる値を返す
-    return view('boards.creat');
+    return view('boards.create');
   }
 
   public function create(Request $request)
