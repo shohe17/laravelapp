@@ -11,7 +11,6 @@ class BoardController extends Controller
   {
     // userテーブルのデータを全て取得
     $items = Board::all();
-    
     return view('boards.index', [
       // 取得した情報を含めてposts.indexに値を
       'items' => $items

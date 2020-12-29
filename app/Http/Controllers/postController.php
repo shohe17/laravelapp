@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-
 class postController extends Controller
 {
   public function index(Request $request)
   {
     // userテーブルのデータを全て取得
-    $items = User::all();
-    
+    $items = User::with('Board')->first();
+    dd($items);
     return view('posts.index', [
       // 取得した情報を含めてposts.indexに値を
       'items' => $items

@@ -75,4 +75,8 @@ class User extends Authenticatable
       static::addGlobalScope(new ScopeUser);
     }
     
+    public function board()
+    {
+      return $this->hasOne('App\Models\Board');
+    }
 }

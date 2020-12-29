@@ -6,13 +6,18 @@
 
 @section('content')
 <table>
-  <tr><th>Data</th></tr>
+  <tr><th>user</th><th>board</th></tr>
     @foreach ($items as $item)
     <tr>
       <!-- usermodelで定義した関数getdataを使ってitemを順に常時する -->
       <td>{{ $item->getData() }}</td>
+      <!-- item->boardに値が入ってる場合処理を実行 -->
+      <!-- 入ってなければ処理をしない -->
+      <td>@if ($item->board != null) {{ $item->board->getData() }}
+          @endif
+      </td>
     </tr>
-  @endforeach
+    @endforeach
   </table>  
 
   <p>これは<middleware>google.com</middleware>へのリンクです</p>
