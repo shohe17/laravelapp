@@ -16,9 +16,9 @@ class CreateBoardsTable extends Migration
         // 第一引数tb名、2はクロージャ
         Schema::create('boards', function (Blueprint $table) {
             // 自動増分, プライマリーキー
-            $table->increments('id');
+            $table->id();
             // 関連するuserテーブルのレコードidを帆kなするためのもの
-            $table->integer('user_id');
+            $table->foreignId('user_id');
             $table->string('title');
             $table->string('message');
             $table->timestamps();

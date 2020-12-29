@@ -13,8 +13,14 @@
       <td>{{ $item->getData() }}</td>
       <!-- item->boardに値が入ってる場合処理を実行 -->
       <!-- 入ってなければ処理をしない -->
-      <td>@if ($item->board != null) {{ $item->board->getData() }}
-          @endif
+      <td>
+      @if ($item->boards != null)
+      <table width="100%">
+      @foreach ($item->boards as $obj)
+        <tr><td>{{ $obj->getData() }}</td></tr>
+      @endforeach
+      </table>
+      @endif
       </td>
     </tr>
     @endforeach

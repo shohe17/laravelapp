@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Board extends Model
 {
     protected $guarded = array('id');
-    
     public static $rules = array(
       'user_id' => 'required',
       'titel' => 'required',
