@@ -12,8 +12,8 @@ class postController extends Controller
   public function index(Request $request)
   {
     // userテーブルのデータを全て取得
-    $items = User::all();
-    
+    $items = User::with('boards')->get();
+    dd($items);
     return view('posts.index', [
       // 取得した情報を含めてposts.indexに値を
       'items' => $items
