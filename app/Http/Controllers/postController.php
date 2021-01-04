@@ -12,12 +12,10 @@ class postController extends Controller
   public function index(Request $request)
   {
     // userテーブルのデータを全て取得
-    $items = User::all();
-    
-    return view('posts.index', [
-      // 取得した情報を含めてposts.indexに値を
-      'items' => $items
-    ]);
+    $hasitems = User::has('boards')->get();
+    $noitems = User::doesntHave('boards')->get();
+    $param = ['hasItems' => $hasitems, 'noItems' => $noitems];
+    return view('posts.index', $param);
   }
 
   // 指定したidのレコード取得

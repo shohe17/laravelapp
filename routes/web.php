@@ -3,6 +3,7 @@
 use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CreatMiddleware;
+use App\Http\Controllers\BoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,8 @@ Route::post('creat/delete', [postController::class, 'remove']);
 
 Route::get('posts/show', [postController::class, 'show']);
 Route::post('posts/show', [postController::class, 'show']);
+
+Route::get('board', [BoardController::class, 'index']);
+
+Route::get('board/create', [BoardController::class, 'showCreateForm']);
+Route::post('board/create', [BoardController::class, 'create']);
