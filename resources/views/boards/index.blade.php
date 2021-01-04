@@ -11,11 +11,12 @@
 
 @section('content')
 <table>
-  <tr><th>Data</th></tr>
+  <tr><th>Message</th><th>Name</th></tr>
     @foreach ($items as $item)
     <tr>
       <!-- usermodelで定義した関数getdataを使ってitemを順に表示 -->
-      <td>{{ $item->getData() }}</td>
+      <td>{{ $item->message }}</td>
+      <td>{{ $item->user->name }}</td>
     </tr>
   @endforeach
   </table>  

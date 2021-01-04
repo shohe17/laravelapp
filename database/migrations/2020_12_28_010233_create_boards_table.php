@@ -18,7 +18,9 @@ class CreateBoardsTable extends Migration
             // 自動増分, プライマリーキー
             $table->id();
             // 関連するuserテーブルのレコードidを帆kなするためのもの
-            $table->foreignId('user_id');
+            // $table->foreignId('user_id');
+            $table->foreignId('user_id')->constrained('users');
+
             $table->string('title');
             $table->string('message');
             $table->timestamps();

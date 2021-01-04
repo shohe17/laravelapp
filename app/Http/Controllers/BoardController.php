@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Board;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
@@ -11,7 +10,7 @@ class BoardController extends Controller
   public function index(Request $request)
   {
     // userテーブルのデータを全て取得
-    $items = User::with('boards')->get();
+    $items = Board::with('user')->get();
     return view('boards.index', [
       // 取得した情報を含めてposts.indexに値を
       'items' => $items
