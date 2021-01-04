@@ -7,37 +7,36 @@
 @section('content')
 <table>
   <tr><th>user</th><th>board</th></tr>
-    @foreach ($items as $item)
+    @foreach ($hasItems as $item)
     <tr>
       <!-- usermodelで定義した関数getdataを使ってitemを順に常時する -->
       <td>{{ $item->getData() }}</td>
       <!-- item->boardに値が入ってる場合処理を実行 -->
       <!-- 入ってなければ処理をしない -->
       <td>
-      @if ($item->boards != null)
       <table width="100%">
       @foreach ($item->boards as $obj)
         <tr><td>{{ $obj->getData() }}</td></tr>
       @endforeach
       </table>
-      @endif
       </td>
     </tr>
     @endforeach
   </table>  
+  <table>
+  <tr><th>user</th></tr>
+  @foreach ($noItems as $item)
+    <tr>
+      <td>{{ $item->getData() }}</td>
+    </tr>
+  @endforeach
+  </table>
 
   <p>これは<middleware>google.com</middleware>へのリンクです</p>
   <p>これは<middleware>yahoo.com</middleware>へのリンクです</p>
   <h1>ここはデータ読みこみ</h1>
   <table>
-  <tr><th>Name</th><th>mail</th><th>age</th></tr>
-    @foreach ($items as $item)
-    <tr>
-      <td>{{ $item->name }}</td>
-      <td>{{ $item->mail }}</td>
-      <td>{{ $item->age }}</td>
-    </tr>
-  @endforeach
+  
   </table>  
   <!-- 引数の中身の>より左が0より大きい場合エラーを表示、countでerrorsを計算する -->
   @if(count($errors) > 0)
