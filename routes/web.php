@@ -4,6 +4,7 @@ use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CreatMiddleware;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\RestappController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,5 @@ Route::get('board', [BoardController::class, 'index']);
 
 Route::get('board/create', [BoardController::class, 'showCreateForm']);
 Route::post('board/create', [BoardController::class, 'create']);
+
+Route::resource('rest', 'RestappController');
