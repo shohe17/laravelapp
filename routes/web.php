@@ -47,3 +47,6 @@ Route::get('board/create', [BoardController::class, 'showCreateForm']);
 Route::post('board/create', [BoardController::class, 'create']);
 
 Route::resource('rest', 'RestappController');
+
+Route::get('/', [postController::class, 'ses_get']);
+Route::post('/', [postController::class, 'ses_put']);
