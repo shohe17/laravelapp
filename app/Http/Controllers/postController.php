@@ -150,4 +150,22 @@ class postController extends Controller
     return redirect('/');
   }
   
+  // posts/sessionにアクセスした時の処理
+  public function ses_get(Request $request)
+  {
+    // セッションしてからmsgをgetする
+    $sesdata = $request->session()->get('msg');
+    // 取り出した値をsession_dataにわたす
+    return view('posts/index', ['session_data' => $sesdata]);
+  }
+
+  // posts/sessionにpostした時の処理
+  public function ses_put(Request $request)
+  {
+    // リクエストされた入力値をmsgに入れる
+    $msg = $request->input;
+    // せっしょんした時に、ドルmsgが'msg'という名前でセッションに保管される
+    $request->session()->put('msg', $msg);
+    return redirect('/');
+  }
 }

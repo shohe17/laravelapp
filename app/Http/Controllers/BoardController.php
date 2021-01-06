@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BoardController extends Controller
 {
   public function index(Request $request)
   {
-    // userテーブルのデータを全て取得
-    $items = Board::with('user')->get();
-    return view('boards.index', [
-      // 取得した情報を含めてposts.indexに値を
-      'items' => $items
-    ]);
+    // クエリー文字列の指定（今回の場合はtitileかmessageが requestに入る）
+    $sort = $request->sort;
+    // userテーブルから5つづつデータを取り出す
+    // DBtableでテーブル指定
+    $items = Board::orderBy($sort, 'asc')->paginate(3);
+    $param = ['items' => $items, 'sort' => $sort]; 
+    return view('boards.index', $param); 
   }
 
   // 指定したidのレコード取得

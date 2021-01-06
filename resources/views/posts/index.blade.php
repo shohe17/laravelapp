@@ -5,32 +5,6 @@
 @endsection
 
 @section('content')
-<table>
-  <tr><th>user</th><th>board</th></tr>
-    @foreach ($hasItems as $item)
-    <tr>
-      <!-- usermodelで定義した関数getdataを使ってitemを順に常時する -->
-      <td>{{ $item->getData() }}</td>
-      <!-- item->boardに値が入ってる場合処理を実行 -->
-      <!-- 入ってなければ処理をしない -->
-      <td>
-      <table width="100%">
-      @foreach ($item->boards as $obj)
-        <tr><td>{{ $obj->getData() }}</td></tr>
-      @endforeach
-      </table>
-      </td>
-    </tr>
-    @endforeach
-  </table>  
-  <table>
-  <tr><th>user</th></tr>
-  @foreach ($noItems as $item)
-    <tr>
-      <td>{{ $item->getData() }}</td>
-    </tr>
-  @endforeach
-  </table>
 
   <p>これは<middleware>google.com</middleware>へのリンクです</p>
   <p>これは<middleware>yahoo.com</middleware>へのリンクです</p>
@@ -66,7 +40,13 @@
     <tr><th></th><td><input type="submit" value="send"></td></tr>
   </table>
   </form>
-
+  <p>{{ $session_data }}</p>
+  <form action="/" method="post">
+  @csrf
+  <input type="text" name="input">
+  <input type="submit" calue="send">
+  </form>
+  
 @endsection
 
 @section('footer')
