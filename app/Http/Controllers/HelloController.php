@@ -3,20 +3,15 @@
 namespace App\Http\Controllers;
 //クラスのインポート
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HelloController extends Controller
 {
-  public function index($id = 'none', $pass = 'unknown')
+  public function index(Request $request)
   {
-    $html = <<<EOF
-<html>
-<body>
-<h2>以下は渡されている必須パラメーター</h2>
-<h2>{$id}</h2>
-<h2>{$pass}</h2>
-</body>
-</html>
-EOF;
- return $html;
+    // userテーブルから5つづつデータを取り出す
+    // DBtableでテーブル指定
+   $items = DB::table('users')->simplePaginate(5);
+   return view('posts.hello', ['items' => $items]); 
   }
 }

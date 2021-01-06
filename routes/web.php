@@ -4,7 +4,7 @@ use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CreatMiddleware;
 use App\Http\Controllers\BoardController;
-use App\Http\Controllers\RestappController;
+use App\Http\Controllers\HelloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,9 @@ use App\Http\Controllers\RestappController;
 // 引数に利用するmiddlewareクラスを指定する
 // middleware('helo')にアクセスしたときはkernel.phpのmiddlewarGroupのheloに登録してあるミドルウェアが実行される
 Route::get('/', [postController::class, 'index'])->middleware('helo');
+
+Route::get('hello', [HelloController::class, 'index']);
+
 Route::get('creat/post', [postController::class, 'post']);
 Route::post('creat', [postController::class, 'postValidation']);
 

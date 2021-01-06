@@ -1,29 +1,27 @@
 <!-- layoutsフォルダのpracticeというフォルダを読み込み -->
 @extends('layouts.practice')
+<style>
+  .pagenation { font-size: 10px; }
+  .pagenation li { display: inline-block; }
+</style>
 <!-- Postという値が表示される -->
-@section('title, Board.index')
+@section('title.hello')
 @endsection
-
-@section('menuber')
-  @parent
-  ボードページ
-@endsection
-
+  @parnent
+  インデックスページ
 @section('content')
-<table>
+  <table>
   <h1>ページネーション練習</h1>
-  <tr><th>title</th><th>message</th></tr>
+  <tr><th>name</th><th>mail</th><th>age</th></tr>
   @foreach ($items as $item)
     <tr>
-      <td>{{ $item->title }}</td>
-      <td>{{ $item->message }}</td>
+      <th>aa</th>
     </tr>
   @endforeach
   </table>
-  <!-- linksメソッドには前後の移動のためのリンクを生成する機能も入っている -->
   {{ $items->links() }}
 
-@endsection
+  @endsection
 
 @section('footer')
 copyright 2020 shosho
