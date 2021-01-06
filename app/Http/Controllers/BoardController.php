@@ -10,12 +10,15 @@ class BoardController extends Controller
 {
   public function index(Request $request)
   {
+    // クエリー文字列の指定（今回の場合はtitileかmessageが requestに入る）
+    $sort = $request->sort;
     // userテーブルから5つづつデータを取り出す
     // DBtableでテーブル指定
-   $items = DB::table('boards')->simplePaginate(3);
-   return view('boards.index', ['items' => $items]); 
+    $items = Board::orderBy($sort, 'asc')->simplePaginate(3);
+    $param = ['items' => $items, 'sort' => $sort]; 
+    return view('boards.index', $param); 
   }
-  
+
   // 指定したidのレコード取得
   public function showCreateForm(Request $request)
   {
