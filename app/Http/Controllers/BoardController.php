@@ -14,7 +14,7 @@ class BoardController extends Controller
     $sort = $request->sort;
     // userテーブルから5つづつデータを取り出す
     // DBtableでテーブル指定
-    $items = Board::orderBy($sort, 'asc')->simplePaginate(3);
+    $items = Board::orderBy($sort, 'asc')->paginate(3);
     $param = ['items' => $items, 'sort' => $sort]; 
     return view('boards.index', $param); 
   }
